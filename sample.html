@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Input Fields Dynamically</title>
+<style>
+  .input-group {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div class="input-group">
+    <input type="text" name="input1" placeholder="Input 1">
+  </div>
+  <div class="input-group">
+    <input type="text" name="input2" placeholder="Input 2">
+  </div>
+</div>
+
+<button id="addFields">+</button>
+
+<script>
+  document.getElementById('addFields').addEventListener('click', function() {
+    var container = document.getElementById('container');
+    var newInputGroup1 = document.createElement('div');
+    newInputGroup1.classList.add('input-group');
+    var input1 = document.createElement('input');
+    input1.type = 'text';
+    input1.name = 'input1';
+    input1.placeholder = 'Input 1';
+    newInputGroup1.appendChild(input1);
+
+    var newInputGroup2 = document.createElement('div');
+    newInputGroup2.classList.add('input-group');
+    var input2 = document.createElement('input');
+    input2.type = 'text';
+    input2.name = 'input2';
+    input2.placeholder = 'Input 2';
+    newInputGroup2.appendChild(input2);
+
+    container.appendChild(newInputGroup1);
+    container.appendChild(newInputGroup2);
+  });
+</script>
+
+</body>
+</html>
