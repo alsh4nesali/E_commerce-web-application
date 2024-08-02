@@ -18,10 +18,14 @@ if(isset($_POST['update_data'])){
     foreach ($_POST['qty_id'] as $key => $quantity_id) {
         $qty = $_POST['qty_item'][$key];
         $id = $quantity_id;
+        $name = $_POST['productName'];
 
         // Update only the row corresponding to the current item
         $sql = "UPDATE tbl_cart SET qty = $qty WHERE uid = $userid AND id = $id";
         $query = $con->prepare($sql);
+
+        $sql="UPDATE tbl_products SET product_qty = product_qty - $qty WHERE product_name = '$name'";
+        $result = mysqli_query($con,$sql);
 
         if($query->execute()) {
             // Do something after each successful update
@@ -84,6 +88,12 @@ if(isset($_POST['update_data'])){
 .quantity-button:active {
   background-color: #e0e0e0;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
 <script>
 function incrementValue(e) {
@@ -124,10 +134,12 @@ while ($row = mysqli_fetch_array($products)){
                     <form method="POST" action="addtocart.php">
                     <div class="quantity-container">
                         <div class="quantity-button up" onclick="incrementValue(event)">▲</div>
+
                         <input type="number" value="<?php echo $row['qty'] ?>" name="qty_item[]" class="quantity-input" required>
                         <div class="quantity-button down" onclick="decrementValue(event)">▼</div>
                     </div>
                     <input type="hidden" name="qty_id[]" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" name="productName" value="<?php echo $row['product_name']; ?>">
                 </div>
             </div>
             

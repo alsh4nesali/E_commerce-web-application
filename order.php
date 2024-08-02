@@ -96,6 +96,7 @@ if ($logged == false) {
                         <label for="payment-method">Mode of Payment</label>
                         <select id="payment-method" name="payment-method">
                             <option>COD</option>
+                            <option>Paypal</option>
                         </select>
                     </div>
                     <button class="place-order-button" type="submit" name="placeOrder">Place Order</button>
